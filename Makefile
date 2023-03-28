@@ -6,7 +6,7 @@ install:
 	pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 format:
 	#format with black
-	black *.py src/*.py lib/*.py 
+	black *.py src/test.py lib/logic.py 
 lint:
 	#flake8 or pylint
 	pylint --disable=R,C src/*.py lib/*.py *.py

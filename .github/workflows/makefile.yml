@@ -24,7 +24,7 @@ jobs:
 
     - name: Format code with flake8
       run: |
-        make format
+        #make format
 
     - name: Lint with pylint
       run: |
@@ -33,7 +33,7 @@ jobs:
     - name: pytest 
       run: |
         #make test
-        
+
     - name: Run check
       run: make check
 

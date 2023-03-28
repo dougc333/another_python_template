@@ -16,6 +16,10 @@ run:
 	#run docker command
 deploy:
 	#deploy to aws ecr or eks
+check:
+	#check does nothing
+distcheck: 
+	#distcheck does nothing
 all:
 	#install lint test deploy
 

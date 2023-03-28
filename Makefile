@@ -7,6 +7,7 @@ install:
 format:
 	#format with black
 	@echo $(CURDIR)
+	@echo $(shell ls)
 	black *.py src/test.py lib/logic.py 
 lint:
 	#flake8 or pylint

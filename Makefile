@@ -8,7 +8,7 @@ format:
 	#format with black
 	@echo $(CURDIR)
 	@echo $(shell ls)
-	black *.py src/test.py lib/logic.py 
+	black *.py src/*.py lib/*.py 
 lint:
 	#flake8 or pylint
 	pylint --disable=R,C src/*.py lib/*.py *.py

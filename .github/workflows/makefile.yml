@@ -23,8 +23,7 @@ jobs:
       run: make install
 
     - name: Format code with flake8
-      run: |
-        #make format
+      run: make format
 
     - name: Lint with pylint
       run: |

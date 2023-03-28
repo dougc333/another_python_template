@@ -8,10 +8,10 @@ format:
 	#format with black
 	@echo $(CURDIR)
 	@echo $(shell ls)
-	black *.py src/*.py lib/*.py 
+	black *.py src/*.py lib/*.py tests/*.py
 lint:
 	#flake8 or pylint
-	pylint --disable=R,C src/*.py lib/*.py *.py
+	pylint --disable=R,C src/*.py lib/*.py *.py tests/*.py
 test:
 	#pytest with coverage
 	

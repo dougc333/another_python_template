@@ -22,6 +22,18 @@ jobs:
     - name: Install dependencies
       run: make install
 
+    - name: Lint with pylint
+      run: |
+        #make lint
+
+    - name: pytest 
+      run: |
+        #make test
+
+    - name: Format code with flake8
+      run: |
+        #make format
+
     - name: Run check
       run: make check
 

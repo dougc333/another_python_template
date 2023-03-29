@@ -4,14 +4,18 @@
 install:
 	#install with pip
 	pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
-format:
-	#format with black
+
+printdebug:
 	@echo $(CURDIR)
 	@echo $(shell ls)
+format:
+	#format with black
 	black *.py src/*.py lib/*.py tests/*.py
+
 lint:
 	#flake8 or pylint
 	pylint --disable=R,C src/*.py lib/*.py *.py tests/*.py
+
 test:
 	#pytest with coverage
 	

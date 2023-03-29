@@ -1,6 +1,8 @@
 API for regression interactions and effect size. 
 for teaching and lecture	
 
+jupyter notebook not in requirements.txt. Not a production library
+no way to put dev-only like in package.json in node
 
 
 1) Test targets for Makefile1. The comments should print out. This tests the make system is working

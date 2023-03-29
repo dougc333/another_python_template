@@ -1,2 +1,14 @@
 API for regression interactions and effect size. 
 for teaching and lecture	
+
+
+
+1) Test targets for Makefile1. The comments should print out. This tests the make system is working
+make -f Makefile1 test, make -f Makefile1 lint, make -f Makefile1 all
+Test github actions with print file first. Verify green 
+Test with makefile1.yml
+
+2) test install, tests python installed correctly and requirements.txt works on local machine. Test Makefile2 with makefile2.yml
+this didnt work bbecause of problem with .gitignore ignoring /lib and there was code in /lib which we needed. 
+Added printdebug to print installed files in github output
+ 

@@ -8,6 +8,7 @@ install:
 printdebug:
 	@echo $(CURDIR)
 	@echo $(shell ls)
+	
 format:
 	#format with black
 	black *.py src/*.py lib/*.py tests/*.py

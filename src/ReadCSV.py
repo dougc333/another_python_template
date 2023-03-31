@@ -1,20 +1,29 @@
 import pandas as pd
 import os
 from dataclasses import dataclass
-import statsmodels.api as sm
-from dataclass import dataclass
 
 
 @dataclass
 class State:
-    df: pd.DataFrame: None
+    df: pd.DataFrame = None
     clean_df: pd.DataFrame = None
     final_df: pd.DataFrame = None
 
+@dataclass
+class CleanDataStats:
+    """CLI: enter in filename from CLI. verify clean data in print output"""
+    num_blanks: int = 0
+    num_na: int = 0
+    num_nulls: int = 0
+    num_rows_removed: int = 0
+    amount_memory_saved: int = 0
+    percent_memory_saved: float = 0
 
 class ReadCSV:
+    """input: filename, output: statistics of datacleaning and memory saved after type conversion"""
+    """CLI: enter in filename from CLI. verify clean data in print output"""
     """read csv file and drop rows with NA and 1 space strings"""
-    file_name: str
+    file_name: str = "Please enter the file name"
     df: pd.DataFrame = None
     clean_df: pd.DataFrame = None
     final_df: pd.DataFrame = None

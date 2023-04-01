@@ -14,3 +14,5 @@ Test with makefile1.yml
 this didnt work bbecause of problem with .gitignore ignoring /lib and there was code in /lib which we needed. 
 Added printdebug to print installed files in github output
  
+3) when adding print statements for debugging during dev, leave them there and convert to logging.debug later
+

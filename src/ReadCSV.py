@@ -1,32 +1,40 @@
 import pandas as pd
 import os
 from dataclasses import dataclass
+import logging
 
-
-@dataclass
+@dataclass(frozen=True)
 class State:
     df: pd.DataFrame = None
     clean_df: pd.DataFrame = None
     final_df: pd.DataFrame = None
 
 @dataclass
-class CleanDataStats:
+class DataStats:
     """CLI: enter in filename from CLI. verify clean data in print output"""
-    num_blanks: int = 0
-    num_na: int = 0
-    num_nulls: int = 0
+    num_blanks_orig: int = 0
+    num_na_orig: int = 0
+    num_nulls_orig: int = 0
+    num_rows_orig: int = 0
     num_rows_removed: int = 0
-    amount_memory_saved: int = 0
-    percent_memory_saved: float = 0
+    df_memory_total_orig: int = 0
+    df_memory_total_after_clean: int = 0
+    df_memory_by_column_orig: pd.Series = None
+    df_memory_by_column_after_clean: pd.Series = None
+    
+    def percent_memory_saved(self):
+        return ((self.df_memory_by_columnm_orig - self.df_memory_total_after_clean)/self.df_memory_by_columnm_orig)*100.0
 
+    
+@dataclass
 class ReadCSV:
     """input: filename, output: statistics of datacleaning and memory saved after type conversion"""
     """CLI: enter in filename from CLI. verify clean data in print output"""
     """read csv file and drop rows with NA and 1 space strings"""
-    file_name: str = "Please enter the file name"
     df: pd.DataFrame = None
     clean_df: pd.DataFrame = None
     final_df: pd.DataFrame = None
+    clean_data_stats: CleanDataStats = None
     
     def __init__(self,file_name):
         self.file_name=file_name
@@ -36,13 +44,18 @@ class ReadCSV:
         self.clean(self.df)
         self.convert_object_types(self.clean_df)
     
+    def populate_stats(self,df):
+        data_stats = DataStats()
+        data_stats.num_rows_orig = df.shape[0]
+        
+        print(self.num_na_null_blank(df))
     
     def read_csv(self)->None:
         if (self.clean_df is None) and (self.final_df is None) and (self.df is None):
             try:
                 df = pd.read_csv(self.file_name)
                 print("number of na, nulls and blanks in df before cleaning")
-                print(self.num_na_null_blank(df))
+                self.populate_stats(df)
             except OSError as e:
                 print(f"Unable to open {file_name}: {e}", file=sys.stderr)
                 return
@@ -70,8 +83,13 @@ class ReadCSV:
         else:
             print("Invalid dataframe state clean")
     
-    def num_na_null_blank(self,df)->(int,int,int):
-        """number of na, null, one space strings"""
+    def num_na_null_blank(self,df)->Tuple(int,int,int):
+        """Input dataframe
+           Output tuple, 
+           1) number of NA in dataframe
+           2) number of null in dataframe
+           3) number of one space strings, deliberately ignore 2 space or more strings
+        """
         print("number of na:",df.isna().sum().sum())
         print("number of null:", df.isnull().sum().sum() )
         print("number of one space empty strings:",(df.values==' ').sum())
@@ -102,7 +120,7 @@ class ReadCSV:
         
 #test file permission wrong, file not there, path not present, path wrong, file name worng, 
 #isDirectoryError, fileNotFound error, permission error
-rc = ReadCSV('../data/NLSY.csv')
+rc = ReadCSV('./data/NLSY.csv')
 
 #print(rc.df)
 #dataclass for state, statistics

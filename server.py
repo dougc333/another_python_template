@@ -3,6 +3,18 @@ from fastapi import FastAPI,Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from prometheus_client import start_http_server, Summary
+import random 
+import time
+
+REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+
+
+@REQUEST_TIME.time()
+async def process_request(t):
+    time.sleep(t)
+
+
 
 #print("running wiki()")
 #print(wiki())

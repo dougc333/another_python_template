@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 from prometheus_client import start_http_server, Summary
 import random 
 import time
+import uvicorn
 
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
 
@@ -35,4 +36,12 @@ async def index():
 #async def hi(request: Request):
 #    return templates.TemplateResponse("index.html", {"request": request})
 
+
+uvicorn.run(app, host="127.0.0.1", port=8000)
+#migrations sqlalembic
+#async mongodb, microxx
+#async postgres db very fast
+#serve statc out of nginx not fastapi never touch fastapi
+#awesome-asgi shows fastapi servers...,
+#
 
